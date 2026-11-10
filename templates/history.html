@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan History | PhishGuard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>PhishGuard</h1>
+    <p>Review your previous email security analyses.</p>
+
+    <a href="/">Back to Analyzer</a>
+
+    <h2>Scan History</h2>
+
+    {% if scans %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Sender</th>
+                    <th>Subject</th>
+                    <th>Risk Score</th>
+                    <th>Risk Level</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for scan in scans %}
+                <tr>
+                    <td>{{ scan.id }}</td>
+                    <td>{{ scan.sender }}</td>
+                    <td>{{ scan.subject }}</td>
+                    <td>{{ scan.risk_score }}/100</td>
+                    <td>{{ scan.risk_level }}</td>
+                    <td>{{ scan.scan_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No scans have been saved yet.</p>
+    {% endif %}
+
+</body>
+</html>
